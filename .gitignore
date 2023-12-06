@@ -1,0 +1,6 @@
+mongo-db-data
+
+.env
+node_modules/
+package-lock.json
+ngrok

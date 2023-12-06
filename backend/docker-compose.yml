@@ -1,0 +1,25 @@
+version: '3'
+services:
+  redis:
+    container_name: tracking-redis-dev
+    image: redis:alpine
+    restart: always
+    expose:
+      - 6379
+  app:
+    container_name: tracking-backend-dev
+    restart: always
+    build: ./
+    volumes:
+      - .:/usr/src/app/
+      - dependencies:/usr/src/app/node_modules
+    working_dir: /usr/src/app
+    depends_on:
+      - redis
+    environment:
+      NODE_ENV: development
+    ports:
+      - 8899:8000
+    command: npm run dev
+volumes:
+  dependencies:
